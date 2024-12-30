@@ -1,12 +1,12 @@
 import LoginHeader from "../LoginHeader/LoginHeader.jsx";
-// import LoginForm from "../LoginForm/LoginForm.jsx";
+import LoginForm from "../LoginForm/LoginForm.jsx";
 
 
 const LoginPage = () => {
     return (
         <div>
             <LoginHeader />
-            {/*<LoginForm />*/}
+            <LoginForm />
         </div>
     );
 };
