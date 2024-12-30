@@ -1,0 +1,18 @@
+.dashboard-table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 80%;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.table-button {
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 0 5px;
+}
