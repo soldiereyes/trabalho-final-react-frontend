@@ -1,25 +1,45 @@
 import React from "react";
 import "./DashboardTable.css";
 
-const DashboardTable = () => {
+const DashboardTable = ({ carros, onEdit, onDelete }) => {
     return (
         <table className="dashboard-table">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Nome</th>
+                <th>Modelo</th>
+                <th>Ano</th>
+                <th>Cor</th>
+                <th>Cavalos de Potência</th>
+                <th>Fabricante</th>
+                <th>País</th>
                 <th>Ações</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>Exemplo</td>
-                <td>
-                    <button className="table-button">Editar</button>
-                    <button className="table-button">Excluir</button>
-                </td>
-            </tr>
+            {carros.map((carro) => (
+                <tr key={carro.id}>
+                    <td>{carro.modelo}</td>
+                    <td>{carro.ano}</td>
+                    <td>{carro.cor}</td>
+                    <td>{carro.cavalosDePotencia}</td>
+                    <td>{carro.fabricante}</td>
+                    <td>{carro.pais}</td>
+                    <td>
+                        <button
+                            className="table-button edit-button"
+                            onClick={() => onEdit(carro)}
+                        >
+                            Editar
+                        </button>
+                        <button
+                            className="table-button delete-button"
+                            onClick={() => onDelete(carro.id)}
+                        >
+                            Excluir
+                        </button>
+                    </td>
+                </tr>
+            ))}
             </tbody>
         </table>
     );
