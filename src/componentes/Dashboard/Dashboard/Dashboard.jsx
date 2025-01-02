@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import DashboardHeader from "../DashboardHeader/DashboardHeader.jsx";
 import DashboardTable from "../DashboardTable/DashboardTable.jsx";
 import FloatingButton from "../../FloatingButton/FloatingButton.jsx";
 import {deleteCar} from "../../../services/carServce.js";
+import CarForm from "../../CarForm/CarForm.jsx";
 
 const Dashboard = () => {
     const [carros, setCarros] = useState([]);
@@ -41,10 +42,19 @@ const Dashboard = () => {
 
     return (
         <div>
-            <DashboardHeader />
-            <DashboardTable carros={carros} onEdit={handleEdit} onDelete={handleDelete} />
-            <FloatingButton onClick={() => setShowForm(true)} />
-            {showForm && <div>Formulário de Cadastro (em construção)</div>}
+            <DashboardHeader/>
+            <DashboardTable carros={carros} onEdit={handleEdit} onDelete={handleDelete}/>
+            <FloatingButton onClick={() => setShowForm(true)}/>
+            {showForm && (
+                <CarForm
+                    onSubmit={(novoCarro) => {
+                        axios.post("http://localhost:8080/api/carros", novoCarro).then((response) => {
+                            setCarros((prev) => [...prev, response.data]);
+                        });
+                    }}
+                    onClose={() => setShowForm(false)}
+                />
+            )}
         </div>
     );
 };
