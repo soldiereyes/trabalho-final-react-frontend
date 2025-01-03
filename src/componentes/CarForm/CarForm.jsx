@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, {useState, useEffect} from "react";
 import "./CarForm.css";
 
-const CarForm = ({ onSubmit, onClose }) => {
+const CarForm = ({initialData = null, onSubmit, onClose}) => {
     const [carro, setCarro] = useState({
+        id: null,
         modelo: "",
         ano: "",
         cor: "",
@@ -11,29 +12,31 @@ const CarForm = ({ onSubmit, onClose }) => {
         pais: "",
     });
 
+    useEffect(() => {
+        if (initialData) {
+            setCarro(initialData);
+        }
+    }, [initialData]);
+
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setCarro((prev) => ({ ...prev, [name]: value }));
+        const {name, value} = e.target;
+        setCarro((prev) => ({...prev, [name]: value}));
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit(carro);
-        setCarro({
-            modelo: "",
-            ano: "",
-            cor: "",
-            cavalosDePotencia: "",
-            fabricante: "",
-            pais: "",
-        });
+        const dataToSubmit = {...carro};
+        if (!initialData) {
+            delete dataToSubmit.id;
+        }
+        onSubmit(dataToSubmit);
         onClose();
-    };
+    }
 
     return (
         <div className="form-overlay">
             <form className="car-form" onSubmit={handleSubmit}>
-                <h2>Cadastrar Novo Carro</h2>
+                <h2>{initialData ? "Editar Carro" : "Cadastrar Novo Carro"}</h2>
                 <input
                     type="text"
                     name="modelo"

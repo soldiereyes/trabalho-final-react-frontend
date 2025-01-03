@@ -1,7 +1,7 @@
 import React from "react";
 import "./DashboardTable.css";
 
-const DashboardTable = ({ carros, onEdit, onDelete }) => {
+const DashboardTable = ({ cars, onEdit, onDelete }) => {
     return (
         <table className="dashboard-table">
             <thead>
@@ -16,24 +16,24 @@ const DashboardTable = ({ carros, onEdit, onDelete }) => {
             </tr>
             </thead>
             <tbody>
-            {carros.map((carro) => (
-                <tr key={carro.id}>
-                    <td>{carro.modelo}</td>
-                    <td>{carro.ano}</td>
-                    <td>{carro.cor}</td>
-                    <td>{carro.cavalosDePotencia}</td>
-                    <td>{carro.fabricante}</td>
-                    <td>{carro.pais}</td>
+            {cars.map((cars) => (
+                <tr key={cars.id}>
+                    <td>{cars.modelo}</td>
+                    <td>{cars.ano}</td>
+                    <td>{cars.cor}</td>
+                    <td>{cars.cavalosDePotencia}</td>
+                    <td>{cars.fabricante}</td>
+                    <td>{cars.pais}</td>
                     <td>
                         <button
                             className="table-button edit-button"
-                            onClick={() => onEdit(carro)}
+                            onClick={() => onEdit(cars)}
                         >
                             Editar
                         </button>
                         <button
                             className="table-button delete-button"
-                            onClick={() => onDelete(carro.id)}
+                            onClick={() => onDelete(cars.id)}
                         >
                             Excluir
                         </button>
